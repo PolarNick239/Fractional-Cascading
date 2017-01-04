@@ -21,7 +21,7 @@ public class StressTest {
         int maxN = 1000;
         int maxM = 1000;
 
-        testStress(testsNumber, maxN, maxM);
+        testStress(testsNumber, maxN, maxM, false);
     }
 
     @Test
@@ -30,15 +30,17 @@ public class StressTest {
         int maxN = 100000;
         int maxM = 100000;
 
-        testStress(testsNumber, maxN, maxM);
+        testStress(testsNumber, maxN, maxM, true);
     }
 
-    private void testStress(int testsNumber, int maxN, int maxM) {
+    private void testStress(int testsNumber, int maxN, int maxM, boolean verbose) {
         Random r = new Random(239);
         for (int test = 1; test <= testsNumber; ++test) {
             int n = 1 + r.nextInt(maxN);
             int m = 1 + r.nextInt(maxM);
-            System.out.println("___Test #" + test + ": n=" + n + " m=" + m + "___");
+            if (verbose) {
+                System.out.println("___Test #" + test + ": n=" + n + " m=" + m + "___");
+            }
 
             int[] xs = new int[n];
             for (int i = 0; i < n; ++i) {
@@ -85,7 +87,9 @@ public class StressTest {
                     }
                 }
                 long passed = System.currentTimeMillis() - start;
-                System.out.println(name + ": " + passed + " ms");
+                if (verbose) {
+                    System.out.println(name + ": " + passed + " ms");
+                }
             }
         }
     }
