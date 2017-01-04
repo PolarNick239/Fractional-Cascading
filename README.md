@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/PolarNick239/Fractional-Cascading.svg)](https://travis-ci.org/PolarNick239/Fractional-Cascading)
+
 Решение является примером использования Range Tree с Fractional Cascading.
 
 Задача взята с http://contest2.yandex.ru/contest/472/problems/16E/

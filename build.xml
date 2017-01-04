@@ -6,27 +6,18 @@
     <target name="mkdirs">
         <mkdir dir="${build.dir}/classes"/>
         <mkdir dir="${build.dir}/test-classes"/>
-        <mkdir dir="${reports.dir}"/>
-        <mkdir dir="${reports.xml.dir}"/>
-        <mkdir dir="${reports.html.dir}"/>
     </target>
 
     <target name="clean">
         <delete dir="${build.dir}"/>
-        <delete dir="${reports.dir}"/>
-        <delete dir="${reports.xml.dir}"/>
-        <delete dir="${reports.html.dir}"/>
     </target>
 
     <path id="classpath">
         <fileset dir="${lib.dir}">
             <include name="**/*.jar"/>
-            <include name="**/*.zip"/>
         </fileset>
 
         <pathelement location="${build.dir}/classes"/>
-        <pathelement location="${build.dir}/test-classes"/>
-        <pathelement location="${lib.dir}"/>
     </path>
 
     <target name="compile" depends="mkdirs">
@@ -35,24 +26,16 @@
     </target>
 
     <target name="test" depends="mkdirs,compile">
-        <junit fork="yes" printsummary="withOutAndErr" failureProperty="test.failure" haltonerror="false">
-            <classpath refid="classpath"/>
-            <syspropertyset>
-                <propertyref builtin="commandline"/>
-            </syspropertyset>
-            <formatter type="xml" usefile="true"/>
-            <batchtest todir="${reports.xml.dir}" fork="yes">
-                <fileset dir="${test.src.dir}">
-                    <include name="**/*Test.java"/>
-                </fileset>
+        <junit printsummary="withOutAndErr" haltonfailure="yes" fork="yes">
+            <classpath>
+                <path refid="classpath"/>
+                <pathelement location="${build.dir}/test-classes"/>
+            </classpath>
+            <formatter type="brief" usefile="false" />
+            <batchtest>
+                <fileset dir="${test.src.dir}" includes="**/*Test.java" />
             </batchtest>
         </junit>
-        <junitreport todir="${reports.xml.dir}">
-            <fileset dir="${reports.xml.dir}">
-                <include name="TEST-*.xml"/>
-            </fileset>
-            <report format="frames" todir="${reports.html.dir}"/>
-        </junitreport>
     </target>
 
 </project>
