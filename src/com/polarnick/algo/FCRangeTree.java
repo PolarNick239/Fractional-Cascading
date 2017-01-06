@@ -2,7 +2,7 @@ package com.polarnick.algo;
 
 public class FCRangeTree implements RangeTree {
 
-    private static final int MAX_INT_ARRAY_SIZE = 1000_000;
+    private static final int MAX_INT_ARRAY_SIZE = 100_000_000;
 
     private final Node root;
 
